@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Atoms, chapter 4</title>
+    <title>Atoms, chapter 4 and 5</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<table></table>
+<!-- objekt Draw pro vykreslování-->
+<script src="draw.js"></script>
 
-<style>
-    td{
-        border: 1px solid black;
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        color: blue;
-    }
-</style>
+<!-- objekt Board jako stav hrací plochy-->
+<script src="board.js"></script>
 
-<script>
-    var table = document.querySelector("table");
+<!-- objekt Player pro práci se vstupem od uživatele-->
+<script src="player.js"></script>
+
+<!-- objekt Game pro řízení hry-->
+<script src="game.js"></script>
+
+<!-- spustit logiku-->
+<script>Game.start()</script>
+
+
+   <!-- var table = document.querySelector("table");
 
     for (var i=0; i<6; i++) {
         var row = document.createElement("tr");
@@ -39,7 +43,7 @@
     var update = function(cell) {
         cell.innerHTML += "o";
     }
-</script>
+-->
 
 </body>
 </html>
