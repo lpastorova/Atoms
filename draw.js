@@ -37,7 +37,7 @@ Draw.all = function() {
 
 /* vykreslit mřížku */
 Draw._lines = function() {
-    this._context.begihPath();
+    this._context?.beginPath();
 
     for (var i=0; i<Game.SIZE+1; i++) { //svislé
         var x = this.LINE/2 + i*this.CELL;
@@ -61,7 +61,65 @@ Draw._cells = function() {
     }
 }
 
+/*Vykreslit jednu buňku */
+Dra._cell = function(x, y, count) {
+    x *= this.CELL;
+    y *= this.CELL;
+    switch (count) {
+        case 1:
+            this._atom(x + this.CELL/2, y + this.CELL/2);
+            break;
+
+        case 2:
+            this._atom(x + this.CELL/4, y + this.CELL/4);
+            this._atom(x + this.CELL*3/4, y + this.CELL*3/4);
+            break;
+
+        case 3:
+            this._atom(x + this.CELL/2, y + this.CELL/2);
+            this._atom(x + this.CELL/4, y + this.CELL/4);
+            this._atom(x + this.CELL*3/4, y + this.CELL*3/4);
+            break;
+
+        case 4:
+            this._atom(x + this.CELL/4, y + this.CELL/4);
+            this._atom(x + this.CELL*3/4, y + this.CELL*3/4);
+            this._atom(x + this.CELL/4, y + this.CELL*3/4);
+            this._atom(x + this.CELL*3/4, y + this.CELL/4);
+            break;
+    }
+}
+
+/*Vykreslit jeden atom*/
+Draw._atom = function(x, y) {
+    this._context?.beginPath();
+
+    this._context.moveTo(x+this.ATOM, y);
+    this._context.arc(x, y, this.ATOM, 0, 2*Math.PI, false);
+
+    this._context.fillStyle = "blue";
+    this._context.fill();
+    this._context.stroke();
+}
+
+/*Převod pozice kurzoru na souřadnice buňky*/
+Dra.getPosition = function(cursorX, cursorY) {
+    var rectangle = thi._context.canvas.getBoundingClientRect();
+
+    cursorX -= rectangle.left;
+    cursorY -= rectangle.top;
+
+    if (cursorX < 0 || cursorX > rectangle.width) { return null; }
+    if (cursorY < 0 || cursorY > rectangle.height) { return null; }
+
+    var cellX = Math.floor(cursorX / this.CELL);
+    var cellY = Math.floor(cursorY / this.CELL);
+    return [cellX, cellY];
+}
+
+/*
 Draw.all = function() {
+
     var html = "<table>";
     for (var i=0; i<Board.length; i++) {
         html += "<tr>";
@@ -105,3 +163,6 @@ Draw.getPosition = function(node) {
 
     return [x, y];
 }
+*/
+
+
